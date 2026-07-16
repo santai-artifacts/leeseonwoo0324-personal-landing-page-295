@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #FAFAF8;
+      --bg-alt:      #F5F3F0;
+      --beige:       #EBE5DD;
+      --beige-dark:  #D9D0C8;
+      --sage:        #E8EBE6;
+      --near-black:  #1A1A1A;
+      --warm-gray:   #6B6B6B;
+      --muted-taupe: #8B8680;
+      --soft-gold:   #D4AF85;
+      --muted-teal:  #A8C5C0;
+    }
+
+    html {
+      background: var(--bg);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--near-black);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 24px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle dot-grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--beige-dark) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Container ─────────────────────────────────────── */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Avatar ────────────────────────────────────────── */
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--beige) 0%, var(--bg-alt) 100%);
+      border: 1.5px solid var(--beige-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--warm-gray);
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    /* ── Name ──────────────────────────────────────────── */
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 600;
+      color: var(--near-black);
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    /* ── Bio ───────────────────────────────────────────── */
+    .bio {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--warm-gray);
+      line-height: 1.75;
+      letter-spacing: 0.2px;
+      text-align: center;
+      max-width: 320px;
+      margin-bottom: 40px;
+    }
+
+    /* ── Soft-gold divider ─────────────────────────────── */
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--soft-gold), transparent);
+      margin-bottom: 40px;
+    }
+
+    /* ── Link cards ────────────────────────────────────── */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--bg);
+      border: 1px solid var(--beige-dark);
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      text-decoration: none;
+      color: var(--near-black);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: border-color 280ms ease-out,
+                  box-shadow   280ms ease-out,
+                  transform    280ms ease-out;
+    }
+
+    .link-card:hover {
+      border-color: var(--muted-teal);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+      transform: translateY(-2px);
+    }
+
+    .link-card:focus-visible {
+      outline: 2px solid var(--muted-teal);
+      outline-offset: 2px;
+    }
+
+    .link-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--warm-gray);
+      transition: color 280ms ease-out;
+    }
+
+    .link-card:hover .link-icon {
+      color: var(--muted-teal);
+    }
+
+    .link-label {
+      flex: 1;
+    }
+
+    .link-arrow {
+      width: 16px;
+      height: 16px;
+      color: var(--beige-dark);
+      transition: color 280ms ease-out, transform 280ms ease-out;
+    }
+
+    .link-card:hover .link-arrow {
+      color: var(--muted-teal);
+      transform: translateX(3px);
+    }
+
+    /* ── Footer ────────────────────────────────────────── */
+    .footer {
+      margin-top: 52px;
+      font-size: 12px;
+      color: var(--muted-taupe);
+      letter-spacing: 0.6px;
+    }
+
+    /* ── Entrance animations ───────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .avatar            { animation: fadeUp 0.5s ease-out 0.00s both; }
+    .name              { animation: fadeUp 0.5s ease-out 0.08s both; }
+    .bio               { animation: fadeUp 0.5s ease-out 0.16s both; }
+    .divider           { animation: fadeUp 0.5s ease-out 0.22s both; }
+    .links             { animation: fadeUp 0.5s ease-out 0.30s both; }
+    .link-card:nth-child(1) { animation: fadeUp 0.5s ease-out 0.30s both; }
+    .link-card:nth-child(2) { animation: fadeUp 0.5s ease-out 0.40s both; }
+    .link-card:nth-child(3) { animation: fadeUp 0.5s ease-out 0.50s both; }
+    .footer            { animation: fadeUp 0.5s ease-out 0.60s both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── Mobile ────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      body  { padding: 48px 24px; }
+      .name { font-size: 38px; }
+      .bio  { font-size: 15px; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Avatar: replace with an <img> when you have a photo -->
+    <div class="avatar" aria-hidden="true">YN</div>
+
+    <h1 class="name">Your Name</h1>
+
+    <p class="bio">
+      Designer &amp; creative storyteller.<br />
+      Crafting calm, intentional experiences that breathe.
+    </p>
+
+    <div class="divider" role="presentation"></div>
+
+    <ul class="links">
+
+      <!-- Instagram -->
+      <li>
+        <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer" class="link-card">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="link-label">Instagram</span>
+          <svg class="link-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </li>
+
+      <!-- Portfolio -->
+      <li>
+        <a href="https://yourportfolio.com" target="_blank" rel="noopener noreferrer" class="link-card">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <span class="link-label">Portfolio</span>
+          <svg class="link-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </li>
+
+      <!-- Contact -->
+      <li>
+        <a href="mailto:hello@yourname.com" class="link-card">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 8l10 7 10-7"/>
+          </svg>
+          <span class="link-label">Contact</span>
+          <svg class="link-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </li>
+
+    </ul>
+
+    <p class="footer">© 2026 Your Name</p>
+
+  </div>
+
+</body>
+</html>
